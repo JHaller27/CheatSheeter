@@ -1,0 +1,25 @@
+/*Variable declarations*/
+
+* {
+    --background-color: #303030;
+    --subtle-color:#404040;
+
+    --primary-color: #0055a0;
+    --secondary-color: #0085a3;
+
+    --text-color: #b4b4b4;
+    --heading-font: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', 'Bookman', 'Goudy Old Style', 'Garamond', 'Hoefler Text', 'Bitstream Charter', 'Georgia', 'serif';
+    --primary-font: 'Noto Sans', 'Myriad Pro', 'Calibri', 'Helvetica', 'Arial', 'sans-serif';
+}
+
+/*********************************************************/
+
+.mainTheme {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--primary-font);
+}
+
+.mainTheme h1 {
+    font-family: var(--heading-font);
+}
