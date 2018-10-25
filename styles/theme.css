@@ -2,12 +2,14 @@
 
 * {
     --background-color: #303030;
-    --subtle-color:#404040;
+    --subtle-color:#505050;
 
-    --primary-color: #0055a0;
-    --secondary-color: #0085a3;
+    --card-area-background-color: white;
 
-    --text-color: #b4b4b4;
+    --card-background-color: #0055a0;
+    --table-color: #0085a3;
+
+    --text-color: #ccc;
     --heading-font: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', 'Bookman', 'Goudy Old Style', 'Garamond', 'Hoefler Text', 'Bitstream Charter', 'Georgia', 'serif';
     --primary-font: 'Noto Sans', 'Myriad Pro', 'Calibri', 'Helvetica', 'Arial', 'sans-serif';
 }
@@ -22,4 +24,37 @@
 
 .mainTheme h1 {
     font-family: var(--heading-font);
+}
+
+.cardArea {
+    background-color: var(--card-area-background-color);
+    padding: 1px;
+    height: 8.5in;
+    width: 11in;
+}
+
+.card {
+    background-color: var(--card-background-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.card h1 {
+    margin: 0 0 10px;
+}
+
+.card table {
+    border-collapse: collapse;
+    background-color: var(--table-color);
+    padding: 5px;
+}
+
+.card td {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.card tbody tr:nth-child(odd) {
+    background-color: var(--subtle-color);
 }

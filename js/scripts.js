@@ -1,9 +1,23 @@
 const title = 'Cheat Sheeter';
 
 const exampleCard = "# Example\n\n" +
-    "| Heads | Tails |\n" +
-    "|:-----:|:-----:|\n" +
-    "| 2     | 1     |";
+    "| 1d6 | type    |\n" +
+    "|:---:|:-------:|\n" +
+    "| 1   | fire    |\n" +
+    "| 2   | cold    |\n" +
+    "| 3   | acid    |\n" +
+    "| 4   | shock   |\n" +
+    "| 5   | psychic |\n" +
+    "| 6   | force   |\n" +
+    "\n" +
+    "_italics_ and **bold** and ~~strikethroughs~~ oh my!\n" +
+    "\n" +
+    "_**List of many things**_\n" +
+    "* Thing 1\n" +
+    "* Thing 2\n" +
+    "    1. Subthing 1\n" +
+    "       * 3 deep!\n" +
+    "    1. Subthing 2";
 
 //=========================================================
 
@@ -14,8 +28,7 @@ const app = angular.module('cheatsheetapp', ['ngSanitize','ng-showdown']);
 
 const showdownOpts = {
     'tables': true,
-    'strikethrough': true,
-    'disableForced4SpacesIndentedSublists': true
+    'strikethrough': true
 };
 
 app.config(['$showdownProvider', function($showdownProvider) {
