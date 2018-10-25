@@ -88,5 +88,57 @@ app.directive('bindHtmlCompile', function($compile) {
 app.controller('mainCtrl', function ($scope) {
     $scope.title = title;
 
-    $scope.cards = exampleCards;
+    $scope.cards = [];
+    $scope.currentCard = '# Example\n\nType with markdown here!';
+
+    $scope.proxy = LocalProxy;
+
+    $scope.loggedIn = false;
+
+    $scope.save = function() {
+        $scope.login();
+        $scope.proxy.store($scope.currentCard);
+    };
+
+    $scope.load = function() {
+        $scope.login();
+        $scope.cards = $scope.proxy.getCards();
+    };
+
+    $scope.register = function() {
+        let usr = prompt('Username...');
+        if (usr === null)
+            return;
+        let pwd = prompt('Password...');
+        if (pwd === null)
+            return;
+
+        $scope.proxy.register(usr, pwd);
+        $scope.proxy.login(usr, pwd);
+        $scope.loggedIn = true;
+    };
+
+    $scope.login = function() {
+        if (!$scope.proxy.isLoggedIn()) {
+            let usr = prompt('Username...');
+            if (usr === null)
+                return;
+            let pwd = prompt('Password...');
+            if (pwd === null)
+                return;
+
+            if (!$scope.proxy.hasLogIn(usr, pwd)) {
+                alert('No login found.');
+            }
+
+            $scope.loggedIn = $scope.proxy.login(usr, pwd);
+        }
+    };
+
+    $scope.logout = function () {
+        if ($scope.proxy.isLoggedIn()) {
+            $scope.proxy.logout();
+            $scope.loggedIn = false;
+        }
+    }
 });

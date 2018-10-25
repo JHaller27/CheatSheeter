@@ -1,45 +1,48 @@
-var LocalProxy = {
-    usr: undefined,
+const LocalProxy = {
+    token: undefined,
+    username: undefined,
 
     // All functions return success/fail messages for now
     //   (useful for console debugging)
 
-    isLoggedIn : function() {
-        return this.usr !== undefined;
+    isLoggedIn: function () {
+        return this.token !== undefined;
     },
-    hasLogIn : function(query) {
+    hasLogIn: function (username, password) {
+        query = this.getLoginToken(username, password);
         return localStorage.getItem(query) !== null;
     },
-    getLoginToken : function(username, password) {
+    getLoginToken: function (username, password) {
         return username + password;
     },
 
-    login : function(username, password) {
+    login: function (username, password) {
         // Only login if not currently logged inFailed to save data
         if (!this.isLoggedIn()) {
-            // Concat username + password for usr login token
-            let query = this.getLoginToken(username, password);
 
             // If user exists in localStorage, then set login token to the query
-            if (this.hasLogIn(query)) {
-                this.usr = query;
+            if (this.hasLogIn(username, password)) {
+                this.token = this.getLoginToken(username, password);
+                this.username = username;
 
-                return "Successful login";
+                return true;
             }
             else {
-                return "That username/password combo does not exist";
+                return false;
             }
         }
         else {
-            return "You are already logged in";
+            return false;
         }
     },
-    register : function(username, password) {
+    logout: function (username, password) {
+        // Only login if not currently logged inFailed to save data
+        this.token = undefined;
+    },
+    register: function (username, password) {
         if (!this.isLoggedIn()) {
-            let query = this.getLoginToken(username, password);
-
-            if (!this.hasLogIn(query)) {
-                localStorage.setItem(query, JSON.stringify([]));
+            if (!this.hasLogIn(username, password)) {
+                localStorage.setItem(this.getLoginToken(username, password), JSON.stringify([]));
                 return "Successful registration";
             }
             else {
@@ -51,20 +54,20 @@ var LocalProxy = {
         }
     },
 
-    store : function (data) {
+    store: function (data) {
         if (this.isLoggedIn()) {
-            let usr_card_list = JSON.parse(localStorage.getItem(this.usr));
+            let usr_card_list = JSON.parse(localStorage.getItem(this.token));
             usr_card_list = usr_card_list.concat(data);
-            localStorage.setItem(this.usr, JSON.stringify(usr_card_list));
+            localStorage.setItem(this.token, JSON.stringify(usr_card_list));
             return "Data successfully saved";
         }
         else {
             return "Not logged in";
         }
     },
-    getCards : function () {
+    getCards: function () {
         if (this.isLoggedIn()) {
-            return JSON.parse(localStorage.getItem(this.usr));
+            return JSON.parse(localStorage.getItem(this.token));
         }
         else {
             return "Not logged in";
