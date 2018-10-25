@@ -1,17 +1,22 @@
 const title = 'Cheat Sheeter';
 
-const showdownOpts = {
-    'tables': true,
-    'strikethrough': true,
-    'disableForced4SpacesIndentedSublists': true
-};
-
 const exampleCard = "# Example\n\n" +
     "| Heads | Tails |\n" +
     "|:-----:|:-----:|\n" +
     "| 2     | 1     |";
 
+//=========================================================
+
 const app = angular.module('cheatsheetapp', ['ngSanitize','ng-showdown']);
+
+// Markdown -> HTML
+//=========================================================
+
+const showdownOpts = {
+    'tables': true,
+    'strikethrough': true,
+    'disableForced4SpacesIndentedSublists': true
+};
 
 app.config(['$showdownProvider', function($showdownProvider) {
     for (let k in showdownOpts) {
@@ -54,13 +59,8 @@ app.directive('bindHtmlCompile', function($compile) {
     };
 });
 
-app.directive('simpleElement', [function() {
-    return {
-        restrict: 'E',
-        replace: true,
-        template: '<div>directive executed</div>'
-    }
-}]);
+// Controller
+//=========================================================
 
 app.controller('mainCtrl', function ($scope) {
     $scope.title = title;
