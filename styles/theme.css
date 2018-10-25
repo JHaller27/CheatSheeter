@@ -61,6 +61,10 @@
     padding: 0;
 }
 
+.card em, .card strong, .card del, .card u, .card span {
+    padding: 0;
+}
+
 .card h1 {
     margin: 0 0 10px;
 }
@@ -81,7 +85,7 @@
 }
 
 
-.card > .invisibleWrapper *:last-child {
+.card > .invisibleWrapper > *:last-child, .card > .invisibleWrapper > *:last-child > *:last-child {
     padding-bottom: 0;
 }
 .card thead {
