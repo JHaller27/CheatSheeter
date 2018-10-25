@@ -2,9 +2,11 @@
 
 * {
     --main-background-color: #303030;
-    --subtle-color:#505050;
-
     --text-color: #ccc;
+
+    --theme-primary-color: #505050;
+    --theme-primary-text-color: var(--text-color);
+
 
     --heading-font: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', 'Bookman', 'Goudy Old Style', 'Garamond', 'Hoefler Text', 'Bitstream Charter', 'Georgia', 'serif';
     --primary-font: 'Noto Sans', 'Myriad Pro', 'Calibri', 'Helvetica', 'Arial', 'sans-serif';
@@ -32,11 +34,11 @@
     font-family: var(--heading-font);
 }
 
+/* Card display */
+
 .cardArea {
     background-color: var(--card-area-background-color);
     padding: 1px;
-    height: 8.5in;
-    width: 11in;
 }
 
 .card {
@@ -126,11 +128,44 @@
     border: 1px solid var(--card-secondary-color);
 }
 
+/* Card editor */
+
+.cardEditor {
+    background-color: var(--theme-primary-color);
+    color: var(--theme-primary-text-color);
+
+    padding: 10px;
+
+    border-radius: 5px;
+}
+
+.editorTextArea {
+    width: 80%;
+    height: 80%;
+}
 
 /* Flex-boxes                                            */
 /*********************************************************/
 
+.appContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
 .cardArea {
+    /* As child of .appContainer */
+    flex: 0 0 11in;
+    width: 11in;
+    height: 8.5in;
+}
+
+.cardEditor {
+    flex: 1 1 auto;
+}
+
+.cardArea {
+    /* As parent of .card */
     display: flex;
     flex-flow: column wrap;
     align-items: stretch;

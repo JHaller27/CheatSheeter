@@ -17,10 +17,15 @@
 <body class="mainTheme">
     <div ng-app="cheatsheetapp" ng-controller="mainCtrl">
         <h1>{{ title }}</h1>
+        <div class="appContainer">
+            <div class="cardArea">
+                <!--suppress JSUnusedLocalSymbols -->
+                <div class="card" ng-repeat="card in cards" markdown="card"></div>
+            </div>
 
-        <div class="cardArea">
-            <!--suppress JSUnusedLocalSymbols -->
-            <div class="card" ng-repeat="card in cards" markdown="card">
+            <div class="cardEditor">
+                <h2>Editor</h2>
+                <textarea class="editorTextArea"></textarea>
             </div>
         </div>
     </div>
