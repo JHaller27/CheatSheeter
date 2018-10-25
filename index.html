@@ -3,13 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Cheat Sheeter</title>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.7/angular-sanitize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.1/showdown.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-showdown/1.1.0/ng-showdown.js"></script>
+
     <script src="js/scripts.js"></script>
+
     <link rel="stylesheet" type="text/css" href="styles/theme.css">
 </head>
 <body class="mainTheme">
     <div ng-app="cheatsheetapp" ng-controller="mainCtrl">
         <h1>{{ title }}</h1>
+
+        <div class="cardArea">
+            <div class="card" ng-repeat="card in cards">
+                <p markdown="card"></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

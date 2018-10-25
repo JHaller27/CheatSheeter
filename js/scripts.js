@@ -1,6 +1,69 @@
-title = 'Cheat Sheeter';
+const title = 'Cheat Sheeter';
 
-const app = angular.module('cheatsheetapp', []);
+const showdownOpts = {
+    'tables': true,
+    'strikethrough': true,
+    'disableForced4SpacesIndentedSublists': true
+};
+
+const exampleCard = "# Example\n\n" +
+    "| Heads | Tails |\n" +
+    "|:-----:|:-----:|\n" +
+    "| 2     | 1     |";
+
+const app = angular.module('cheatsheetapp', ['ngSanitize','ng-showdown']);
+
+app.config(['$showdownProvider', function($showdownProvider) {
+    for (let k in showdownOpts) {
+        $showdownProvider.setOption(k, showdownOpts[k]);
+    }
+}]);
+
+app.directive('markdown', function($showdown, $sanitize, $sce) {
+    return {
+        restrict: 'A',
+        link: function (scope) {
+            scope.$watch('model', function (newValue) {
+                let showdownHTML;
+                if (typeof newValue === 'string') {
+                    showdownHTML = $showdown.makeHtml(newValue);
+                    scope.trustedHtml = ($showdown.getOption('sanitize')) ? $sanitize(showdownHTML) : $sce.trustAsHtml(showdownHTML);
+                } else {
+                    scope.trustedHtml = typeof newValue;
+                }
+            });
+        },
+        scope: {
+            model: '=markdown'
+        },
+        template: '<div bind-html-compile="trustedHtml"></div>'
+    };
+});
+
+app.directive('bindHtmlCompile', function($compile) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            scope.$watch(function() {
+                return scope.$eval(attrs.bindHtmlCompile);
+            }, function(value) {
+                element.html(value);
+                $compile(element.contents())(scope);
+            });
+        }
+    };
+});
+
+app.directive('simpleElement', [function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: '<div>directive executed</div>'
+    }
+}]);
+
 app.controller('mainCtrl', function ($scope) {
     $scope.title = title;
+
+    $scope.cards = [exampleCard];
 });
