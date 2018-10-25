@@ -25,6 +25,7 @@ app.config(['$showdownProvider', function($showdownProvider) {
 }]);
 
 app.directive('markdown', function($showdown, $sanitize, $sce) {
+    // noinspection JSUnusedGlobalSymbols
     return {
         restrict: 'A',
         link: function (scope) {
@@ -46,6 +47,7 @@ app.directive('markdown', function($showdown, $sanitize, $sce) {
 });
 
 app.directive('bindHtmlCompile', function($compile) {
+    // noinspection JSUnusedGlobalSymbols
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
