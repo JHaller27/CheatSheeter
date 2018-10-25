@@ -18,6 +18,8 @@
     --card-secondary-text-color: white;
 }
 
+
+/* Themes                                                */
 /*********************************************************/
 
 .mainTheme {
@@ -118,4 +120,15 @@
     margin: 3px;
     padding: 0;
     border: 1px solid var(--card-secondary-color);
+}
+
+
+/* Flex-boxes                                            */
+/*********************************************************/
+
+.cardArea {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: stretch;
+    align-content: stretch;
 }
