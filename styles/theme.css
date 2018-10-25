@@ -1,23 +1,27 @@
 /*Variable declarations*/
 
 * {
-    --background-color: #303030;
+    --main-background-color: #303030;
     --subtle-color:#505050;
+
+    --text-color: #ccc;
+
+    --heading-font: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', 'Bookman', 'Goudy Old Style', 'Garamond', 'Hoefler Text', 'Bitstream Charter', 'Georgia', 'serif';
+    --primary-font: 'Noto Sans', 'Myriad Pro', 'Calibri', 'Helvetica', 'Arial', 'sans-serif';
 
     --card-area-background-color: white;
 
-    --card-background-color: #0055a0;
-    --table-color: #0085a3;
+    --card-primary-color: #81b5e2;
+    --card-secondary-color: #0055a0;
 
-    --text-color: #ccc;
-    --heading-font: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', 'Bookman', 'Goudy Old Style', 'Garamond', 'Hoefler Text', 'Bitstream Charter', 'Georgia', 'serif';
-    --primary-font: 'Noto Sans', 'Myriad Pro', 'Calibri', 'Helvetica', 'Arial', 'sans-serif';
+    --card-primary-text-color: black;
+    --card-secondary-text-color: white;
 }
 
 /*********************************************************/
 
 .mainTheme {
-    background-color: var(--background-color);
+    background-color: var(--main-background-color);
     color: var(--text-color);
     font-family: var(--primary-font);
 }
@@ -34,20 +38,53 @@
 }
 
 .card {
-    background-color: var(--card-background-color);
-    padding: 10px;
-    border-radius: 10px;
+    background-color: var(--card-primary-color);
+    color: var(--card-primary-text-color);
     margin: 10px;
+    border-radius: 5px;
+    border-top: 10px solid var(--card-secondary-color);
+    border-bottom: 5px solid var(--card-secondary-color);
+}
+
+.card * {
+    margin: 0;
+    padding: 3px;
+}
+
+.card h2, .card h3, .card p {
+    padding: 3px 3px 3px 10px;
+}
+
+.card .invisibleWrapper {
+    padding: 0;
 }
 
 .card h1 {
     margin: 0 0 10px;
 }
 
+.card h2, .card h3 {
+    background-color: var(--card-secondary-color);
+    color: var(--card-secondary-text-color);
+}
+
+.card h2:first-child, .card h3:first-child {
+    margin-bottom: 5px;
+}
+
 .card table {
     border-collapse: collapse;
-    background-color: var(--table-color);
     padding: 5px;
+    width: 100%;
+}
+
+
+.card > .invisibleWrapper *:last-child {
+    padding-bottom: 0;
+}
+.card thead {
+    background-color: var(--card-secondary-color);
+    color: var(--card-secondary-text-color);
 }
 
 .card td {
@@ -55,6 +92,30 @@
     padding-right: 20px;
 }
 
-.card tbody tr:nth-child(odd) {
-    background-color: var(--subtle-color);
+.card tbody tr:nth-child(even), .card ul > li:nth-child(even) {
+    background-color: white;
+}
+
+.card ol {
+    padding-left: 30px;
+}
+
+.card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card ul > li{
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+.card ul > li:nth-child(odd) {
+    background-color: var(--card-primary-color);
+}
+
+.card hr {
+    margin: 3px;
+    padding: 0;
+    border: 1px solid var(--card-secondary-color);
 }

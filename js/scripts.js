@@ -1,6 +1,7 @@
 const title = 'Cheat Sheeter';
 
-const exampleCard = "# Example\n\n" +
+const exampleCards = [
+    "# Example\n\n" +
     "| 1d6 | type    |\n" +
     "|:---:|:-------:|\n" +
     "| 1   | fire    |\n" +
@@ -11,13 +12,15 @@ const exampleCard = "# Example\n\n" +
     "| 6   | force   |\n" +
     "\n" +
     "_italics_ and **bold** and ~~strikethroughs~~ oh my!\n" +
+    "\nBut wait __there's more!__\n" +
     "\n" +
-    "_**List of many things**_\n" +
+    "## List of many things\n" +
     "* Thing 1\n" +
     "* Thing 2\n" +
-    "    1. Subthing 1\n" +
-    "       * 3 deep!\n" +
-    "    1. Subthing 2";
+    "* Thing 3\n" +
+    "    * Subthing 1\n" +
+    "    * Subthing 2"
+];
 
 //=========================================================
 
@@ -28,7 +31,12 @@ const app = angular.module('cheatsheetapp', ['ngSanitize','ng-showdown']);
 
 const showdownOpts = {
     'tables': true,
-    'strikethrough': true
+    'strikethrough': true,
+    'underline': true,
+    'emojis': true,
+    'simpleLineBreaks': true,
+    'requireSpaceBeforeHeadingText': true,
+    'headerLevelStart': 2
 };
 
 app.config(['$showdownProvider', function($showdownProvider) {
@@ -55,7 +63,7 @@ app.directive('markdown', function($showdown, $sanitize, $sce) {
         scope: {
             model: '=markdown'
         },
-        template: '<div bind-html-compile="trustedHtml"></div>'
+        template: '<div class="invisibleWrapper" bind-html-compile="trustedHtml"></div>'
     };
 });
 
@@ -80,5 +88,5 @@ app.directive('bindHtmlCompile', function($compile) {
 app.controller('mainCtrl', function ($scope) {
     $scope.title = title;
 
-    $scope.cards = [exampleCard];
+    $scope.cards = exampleCards;
 });
