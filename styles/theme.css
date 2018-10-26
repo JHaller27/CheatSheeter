@@ -142,6 +142,15 @@
     border-radius: 5px;
 }
 
+.cardEditor h2:first-child {
+    margin-top: 0;
+}
+
+.cardEditor .editorControlPanel {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .cardEditor > .editorTextArea {
     width: 100%;
     height: 150px;
@@ -150,6 +159,8 @@
 /* Flex-boxes                                            */
 /*********************************************************/
 
+/* Container: .appContainer */
+
 .appContainer {
     display: flex;
     flex-flow: row wrap-reverse;
@@ -157,7 +168,6 @@
 }
 
 .cardArea {
-    /* As child of .appContainer */
     flex: 0 0 11in;
     width: 11in;
     height: 8.5in;
@@ -167,10 +177,26 @@
     flex: 1 0 300px;
 }
 
+/* Container: .cardArea */
+
 .cardArea {
-    /* As parent of .card */
     display: flex;
     flex-flow: column wrap;
     align-items: stretch;
     align-content: stretch;
+}
+
+/* Container: .cardEditor */
+
+.cardEditor {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.cardEditor .editorControlPanel {
+    flex: 0 0 0;
+}
+
+.cardEditor .editorTextArea {
+    flex: 1 0 100px;
 }
