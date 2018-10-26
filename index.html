@@ -19,15 +19,14 @@
         <h1>{{ title }}</h1>
         <div class="appContainer">
             <div class="cardArea">
-                <div class="card" markdown="currentCard"></div>
                 <!--suppress JSUnusedLocalSymbols -->
-                <div class="card" ng-repeat="card in cards" markdown="card"></div>
+                <div class="card" ng-repeat="card in getCardList()" markdown="card"></div>
             </div>
 
             <div class="cardEditor">
                 <h2>Editor</h2>
                 <div ng-hide="loggedIn">
-                    <button ng-click="login()">Login</button>
+                    <button ng-click="ensureLogin()">Login</button>
                     <button ng-click="register()">Register</button>
                 </div>
                 <div ng-hide="!loggedIn">
@@ -37,7 +36,7 @@
                     <button ng-click="save()">Save</button>
                     <button ng-click="load()">Load</button>
                 </div>
-                <textarea class="editorTextArea" ng-model="currentCard"></textarea>
+                <textarea class="editorTextArea" ng-model="cardData"></textarea>
             </div>
         </div>
     </div>

@@ -88,21 +88,39 @@ app.directive('bindHtmlCompile', function($compile) {
 app.controller('mainCtrl', function ($scope) {
     $scope.title = title;
 
-    $scope.cards = [];
-    $scope.currentCard = '# Example\n\nType with markdown here!';
+    $scope.cardData = '# Example\n\nType with markdown here!';
 
     $scope.proxy = LocalProxy;
 
     $scope.loggedIn = false;
 
+    $scope.getCardList = function() {
+        let data = [];
+        const cardList = $scope.cardData.split('\n/end');
+
+        for (let i in cardList) {
+            const x = cardList[i];
+            if (x !== "") {
+                data = data.concat(x);
+            }
+        }
+
+        return data;
+    };
+
     $scope.save = function() {
-        $scope.login();
-        $scope.proxy.store($scope.currentCard);
+        $scope.ensureLogin();
+        $scope.proxy.store($scope.cardData);
     };
 
     $scope.load = function() {
-        $scope.login();
-        $scope.cards = $scope.proxy.getCards();
+        $scope.ensureLogin();
+        try {
+            $scope.cardData = $scope.proxy.getCards();
+        }
+        catch(err) {
+            console.log($scope.proxy.getCards());
+        }
     };
 
     $scope.register = function() {
@@ -114,11 +132,11 @@ app.controller('mainCtrl', function ($scope) {
             return;
 
         $scope.proxy.register(usr, pwd);
-        $scope.proxy.login(usr, pwd);
+        $scope.proxy.ensureLogin(usr, pwd);
         $scope.loggedIn = true;
     };
 
-    $scope.login = function() {
+    $scope.ensureLogin = function() {
         if (!$scope.proxy.isLoggedIn()) {
             let usr = prompt('Username...');
             if (usr === null)

@@ -56,9 +56,7 @@ const LocalProxy = {
 
     store: function (data) {
         if (this.isLoggedIn()) {
-            let usr_card_list = JSON.parse(localStorage.getItem(this.token));
-            usr_card_list = usr_card_list.concat(data);
-            localStorage.setItem(this.token, JSON.stringify(usr_card_list));
+            localStorage.setItem(this.token, JSON.stringify(data));
             return "Data successfully saved";
         }
         else {
