@@ -1,27 +1,5 @@
 const title = 'Cheat Sheeter';
 
-const exampleCards = [
-    "# Example\n\n" +
-    "| 1d6 | type    |\n" +
-    "|:---:|:-------:|\n" +
-    "| 1   | fire    |\n" +
-    "| 2   | cold    |\n" +
-    "| 3   | acid    |\n" +
-    "| 4   | shock   |\n" +
-    "| 5   | psychic |\n" +
-    "| 6   | force   |\n" +
-    "\n" +
-    "_italics_ and **bold** and ~~strikethroughs~~ oh my!\n" +
-    "\nBut wait __there's more!__\n" +
-    "\n" +
-    "## List of many things\n" +
-    "* Thing 1\n" +
-    "* Thing 2\n" +
-    "* Thing 3\n" +
-    "    * Subthing 1\n" +
-    "    * Subthing 2"
-];
-
 //=========================================================
 
 const app = angular.module('cheatsheetapp', ['ngSanitize','ng-showdown']);
@@ -33,10 +11,10 @@ const showdownOpts = {
     'tables': true,
     'strikethrough': true,
     'underline': true,
-    'emojis': true,
     'simpleLineBreaks': true,
     'requireSpaceBeforeHeadingText': true,
-    'headerLevelStart': 2
+    'headerLevelStart': 2,
+    'parseImgDimensions': true
 };
 
 app.config(['$showdownProvider', function($showdownProvider) {
@@ -73,6 +51,7 @@ app.directive('bindHtmlCompile', function($compile) {
         restrict: 'A',
         link: function(scope, element, attrs) {
             scope.$watch(function() {
+                // noinspection JSUnresolvedVariable
                 return scope.$eval(attrs.bindHtmlCompile);
             }, function(value) {
                 element.html(value);

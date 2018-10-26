@@ -9,7 +9,7 @@ const LocalProxy = {
         return this.token !== undefined;
     },
     hasLogIn: function (username, password) {
-        query = this.getLoginToken(username, password);
+        const query = this.getLoginToken(username, password);
         return localStorage.getItem(query) !== null;
     },
     getLoginToken: function (username, password) {
@@ -35,7 +35,7 @@ const LocalProxy = {
             return false;
         }
     },
-    logout: function (username, password) {
+    logout: function () {
         // Only login if not currently logged inFailed to save data
         this.token = undefined;
     },
