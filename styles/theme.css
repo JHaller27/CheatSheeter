@@ -7,6 +7,7 @@
     --theme-primary-color: #505050;
     --theme-primary-text-color: var(--text-color);
 
+    --link-color: #7bc0fc;
 
     --heading-font: 'Libre Baskerville', 'Lora', 'Calisto MT', 'Bookman Old Style', 'Bookman', 'Goudy Old Style', 'Garamond', 'Hoefler Text', 'Bitstream Charter', 'Georgia', 'serif';
     --primary-font: 'Noto Sans', 'Myriad Pro', 'Calibri', 'Helvetica', 'Arial', 'sans-serif';
@@ -32,6 +33,15 @@
 
 .mainTheme h1 {
     font-family: var(--heading-font);
+}
+
+.mainTheme a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.mainTheme a:hover {
+    text-decoration: underline;
 }
 
 /* Card display */
