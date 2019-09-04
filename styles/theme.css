@@ -210,3 +210,17 @@
 .cardEditor .editorTextArea {
     flex: 1 0 100px;
 }
+
+/* Print styling                                         */
+/*********************************************************/
+
+@media only print {
+    h1, .cardEditor {
+        display: none !important;
+    }
+    
+    body {
+        margin: 0 !important;
+        background-color: white !important;
+    }
+}
